@@ -14,8 +14,12 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '827c70093f2ed9c6091e5124bc2f45304f77cc876d72ed1f2707c95a84f21c9a4652161094646916254616ddb6d8d95a3bcb4416e68ea1dee68b80f5c3d93fca'
+  # config.secret_key = '27df4be78871662c5d6ecbff52dab5aff72a63d2d793f04f7c799a957b6d39da180e9b9f85a5e03cade38a38bd23dd85e5ba74a186e8bfd4318676e63207607a'
 
+  config.jwt do |jwt|
+		jwt.secret = Rails.application.credentials.devise[:jwt_secret_key]
+  end
+  
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
@@ -24,10 +28,10 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = 'snipshare.dev@gmail.com'
 
   # Configure the class responsible to send e-mails.
-  # config.mailer = 'Devise::Mailer'
+  config.mailer = 'UserMailer'
 
   # Configure the parent class responsible to send e-mails.
   # config.parent_mailer = 'ActionMailer::Base'
@@ -126,7 +130,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '9a4148df55f6040038d0ed3ad45c3a6919874627b4f9a4c732339965e42fa50ef9ea8f8ba4746d4b6a60e43a48003b8be841fa49388155511ebb6c0127c6fa76'
+  # config.pepper = '67696fee39b8a1567341fa2225baae4425bd662845f8a36ce052ed8c18aebeff5b1f0a74e7e377633bfcaaa8433b56efa437231602ab181196e6872024c1a696'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -308,7 +312,4 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
-  config.jwt do |jwt|
-    jwt.secret = Rails.application.credentials.devise[:jwt_secret_key]
-  end
 end
